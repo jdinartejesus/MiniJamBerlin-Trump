@@ -2,6 +2,8 @@
 exports.fallingObjects = function (items, container) {
   if (!items || !container) { return; }
 
+  var HEIGHT = 600;
+
   var objectsContainer = new createjs.Container();
   var timeNewItem = 0;
 
@@ -23,10 +25,10 @@ exports.fallingObjects = function (items, container) {
     }
 
     timeNewItem++;
-    stage.update();
+    container.update();
   });
 
-  stage.addChild(objectsContainer);
+  container.addChild(objectsContainer);
 };
 
 var randomItem = function (items) {
@@ -49,9 +51,10 @@ var moveItem = function (item) {
 
 var addingItem = function (item, container) {
 
+  var WIDTH = 1000;
   var ICONBORDER = 16;
   var newItem = new Image();
-  newItem = new createjs.Bitmap(preload.getResult(item));
+  newItem = new createjs.Bitmap(item);
   var newItemY, newItemX;
 
   var lastItem = container.children[container.children.length - 1];
