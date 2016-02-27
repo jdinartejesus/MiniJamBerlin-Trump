@@ -29,19 +29,19 @@ window.onload = function () {
 			src: '../images/example.png'
 		}, {
 			id: 'bg',
-			src: '../images/bg/space.png',
+			src: '../images/space.png',
 		}, {
 			id: 'heaven',
-			src: '../images/bg/heaven.png',
+			src: '../images/heaven.png',
 		}, {
 			id: 'hell',
-			src: '../images/bg/hell.png',
+			src: '../images/hell.png',
 		}, {
 			id: 'trump',
-			src: '../images/trump/trump.png'
+			src: '../images/trump.png'
 		}, {
 			id: 'bullet',
-			src: '../images/objects/bullet.png'
+			src: '../images/bullet.png'
 		}
 	]);
   preload.on('complete', init, this);
