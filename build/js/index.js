@@ -1434,11 +1434,11 @@ window.onload = function () {
   }
 };
 
-}).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_dac02d7f.js","/")
+}).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_92587000.js","/")
 },{"./fallingObjects.js":6,"FT5ORs":4,"buffer":2}],6:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 /* global createjs, GAMEFPS, preload, stage */
-exports.fallingObejcts = function (items, container) {
+exports.fallingObjects = function (items, container) {
   if (!items || !container) { return; }
 
   var objectsContainer = new createjs.Container();
@@ -1447,10 +1447,9 @@ exports.fallingObejcts = function (items, container) {
   createjs.Ticker.setFPS(60);
   createjs.Ticker.addEventListener('tick', function (event) {
 
-    timeNewItem++;
-
-    if (timeNewItem == 20) {
-      addingItem(items, objectsContainer);
+    if (timeNewItem == 50) {
+      var item = randomItem(items);
+      addingItem(item, objectsContainer);
       timeNewItem = 0;
     }
 
@@ -1461,9 +1460,25 @@ exports.fallingObejcts = function (items, container) {
         objectsContainer.removeChildAt(j);
       }
     }
+
+    timeNewItem++;
+    stage.update();
   });
 
   stage.addChild(objectsContainer);
+};
+
+var randomItem = function (items) {
+
+  if (!items) {return;}
+
+  var randomItem = Math.floor(Math.random() * (100 - 0) + 0);
+
+  if (randomItem <= 30) {
+    return items[1];
+  }else {
+    return items[0];
+  }
 };
 
 var moveItem = function (item) {
@@ -1493,7 +1508,6 @@ var addingItem = function (item, container) {
   newItem.y = newItemY;
 
   container.addChild(newItem);
-  stage.update();
 };
 
 }).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fallingObjects.js","/")
