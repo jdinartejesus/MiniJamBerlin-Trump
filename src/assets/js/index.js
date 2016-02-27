@@ -49,7 +49,7 @@ window.onload = function () {
   function init() {
   	createjs.Ticker.setFPS(60);
   	movingTrump.init(stage, preload, WIDTH, HEIGHT);
-    fallingObjects('holyBible', stage);
+    //fallingObjects('holyBible', stage);
     stage.update();
   }
 };

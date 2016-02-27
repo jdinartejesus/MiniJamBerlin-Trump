@@ -17,115 +17,105 @@ exports.init = function(stage, preload, width, height) {
 		return bitmap;
 	}
 
-	var bullets = [];
 
-	var bg = addImage('bg',0,0);
-	var trump = addImage('trump', width/2, height-140);
+	var bg = addImage('bg', 0, 0);
+	var trump = addImage('trump', width / 2, height - 140);
 
-	var moveLeft = false;
-	var moveRight = false;
-	var firing = false;
+	var inputs = {
+		moveLeft: false,
+		moveRight: false,
+		firing: false
+	}
 
 	var currentFireDelay = 0;
+	var bullets = [];
+
 	function fireTick() {
 		if (currentFireDelay > 0) {
+			currentFireDelay--;
 			return;
 		}
 		currentFireDelay = FIRE_DELAY;
-		var bullet = addImage('bullet', trump.x+75, trump.y-15);
+		var bullet = addImage('bullet', trump.x + 75, trump.y - 15);
 		bullets.push(bullet);
 	}
 
+	function updateBullets() {
+		bullets.forEach(function(bullet) {
+			bullet.y -= BULLET_SPEED;
+		});
+	}
+
 	createjs.Ticker.addEventListener("tick", handleTick);
+
 	function handleTick(event) {
-	     if (moveLeft && accel > -MAX_ACCEL) {
-	     	if (accel > 0) {
-	     		accel -= 4*ACCELERATION_PER_FRAME ; 
-	     	} else {
-	     		accel -= ACCELERATION_PER_FRAME ; 
-	     	}
-	     }
-	     if (moveRight && accel < MAX_ACCEL) {
-	     	if (accel < 0) {
-	     		accel += 4*ACCELERATION_PER_FRAME ; 
-	     	} else {
-	     		accel += ACCELERATION_PER_FRAME ; 
-	     	}
-	     }
-	     if (!moveRight && !moveLeft) {
-	     	if (accel > 0) {
-	     		accel = accel - ACCELERATION_PER_FRAME ; 
-	     	} else {
-	     		accel = accel + ACCELERATION_PER_FRAME ;  
-	     	}
-	     	if (almostEqual(accel,0)) {
-	     		accel = 0;
-	     	}
-	     }
+		if (inputs.moveLeft && accel > -MAX_ACCEL) {
+			if (accel > 0) {
+				accel -= 4 * ACCELERATION_PER_FRAME;
+			} else {
+				accel -= ACCELERATION_PER_FRAME;
+			}
+		}
+		if (inputs.moveRight && accel < MAX_ACCEL) {
+			if (accel < 0) {
+				accel += 4 * ACCELERATION_PER_FRAME;
+			} else {
+				accel += ACCELERATION_PER_FRAME;
+			}
+		}
+		if (!inputs.moveRight && !inputs.moveLeft) {
+			if (accel > 0) {
+				accel = accel - ACCELERATION_PER_FRAME;
+			} else {
+				accel = accel + ACCELERATION_PER_FRAME;
+			}
+			if (almostEqual(accel, 0)) {
+				accel = 0;
+			}
+		}
 
-	     moveTrump();
 
-	     if (firing) {
-	     	fireTick();
-	     }
+		if (inputs.firing) {
+			fireTick();
+		}
 
-	     // Move Bullets
-	     bullets.forEach(function(bullet) {
-	     	bullet.y -= BULLET_SPEED;
-	     });
+		moveTrump();
+		updateBullets();
 
-	     stage.update();
-	 }
-
-	 function moveTrump() {
-	 	trump.x += accel;
-	 	if (trump.x > width - TRUMP_WIDTH) {
-	 		trump.x = width - TRUMP_WIDTH;     	
-	 	}
-	 	if (trump.x < 0) {
-	 		trump.x = 0;     	
-	 	}
-	 }
-
-	 window.onkeydown = function(event) {
-	 	keyHandler(event.keyCode, true);
-	 };
-
-	 window.onkeyup = function(event) {
-	 	keyHandler(event.keyCode, false);
-	 };
-
-	 window.onmousedown = function(event) {
-	 	if (event.button == 0) {
-	 		firing = true;
-	 	} 
-	 	if (event.button == 2) {
-	 		altFiring = true;
-	 	}
-	 };
-	 window.onmouseup = function(event) {
-	 	if (event.button == 0) {
-	 		firing = false;
-	 	}
-	 	if (event.button == 2) {
-	 		altFiring = true;
-	 	}
-	 };
-
-	 function keyHandler(keyCode, down) {
-	 	switch (event.keyCode) {
-			case 37: // left
-			moveLeft = !!down;
-			break;
-			case 39:  // right
-			moveRight = !!down;
-			break;
-		};
+		stage.update();
 	}
 
-	function almostEqual(a,b) {
-		return Math.abs(a-b) < ACCELERATION_PER_FRAME + 0.1;
+	function moveTrump() {
+		trump.x += accel;
+		if (trump.x > width - TRUMP_WIDTH) {
+			trump.x = width - TRUMP_WIDTH;
+		}
+		if (trump.x < 0) {
+			trump.x = 0;
+		}
 	}
 
+	window.onkeydown = function(event) {
+		keyHandler(event.keyCode, true);
+	};
 
+	window.onkeyup = function(event) {
+		keyHandler(event.keyCode, false);
+	};
+
+	function keyHandler(keyCode, keyDown) {
+		console.log(keyCode);
+		if (event.keyCode == 37) { // left 
+			inputs.moveLeft = !!keyDown;
+		} else if (event.keyCode == 39) {
+			inputs.moveRight = !!keyDown;
+		} else if (event.keyCode == 32) {
+			inputs.firing = !!keyDown;
+		}
+	}
+
+	function almostEqual(a, b) {
+		return Math.abs(a - b) < ACCELERATION_PER_FRAME + 0.1;
+	}
 }
+
