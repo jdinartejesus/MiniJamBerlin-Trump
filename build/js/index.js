@@ -1396,7 +1396,41 @@ process.chdir = function (dir) {
 }).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../../node_modules/process/browser.js","/../../../node_modules/process")
 },{"FT5ORs":4,"buffer":2}],5:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
-alert('hello');
+window.onload = function () {
 
-}).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_fba03c0f.js","/")
+  // Global Values
+  var WIDTH = 768;
+  var HEIGHT = 1024;
+
+  // Components
+  var fallingObjects = require('./fallingObjects.js');
+
+  // Canvas Settings
+  var canvas = document.getElementById('halloween');
+  canvas.width = WIDTH;
+  canvas.height = HEIGHT;
+  canvas.getContext('2d');
+
+  var stage = new createjs.Stage(canvas);
+
+  // Loading Images
+  var preload = new createjs.LoadQueue();
+  preload.loadManifest([{
+    id: 'example', src: '../images/example.png',
+  },
+
+  // Add images here and ID
+  ]);
+  preload.on('complete', init, this);
+
+  function init() {
+
+  }
+};
+
+}).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_13722527.js","/")
+},{"./fallingObjects.js":6,"FT5ORs":4,"buffer":2}],6:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+
+}).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fallingObjects.js","/")
 },{"FT5ORs":4,"buffer":2}]},{},[5])
