@@ -62,7 +62,7 @@ gulp.task('scripts', function () {
 gulp.task('images', function () {
   var dev = env === 'development';
   return gulp.src(paths.images)
-    .pipe(imagemin({ optimizationLevel: 5 }))
+    //.pipe(imagemin({ optimizationLevel: 5 }))
     .pipe(gulp.dest(dev ? 'build/images' : 'dist/images'));
 });
 

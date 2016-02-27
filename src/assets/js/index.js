@@ -5,7 +5,7 @@ window.onload = function () {
   var HEIGHT = 600;
 
   // Components
-  var fallingObjects = require('./fallingObjects.js');
+  var fallingObjects = require('./fallingObjects.js').fallingObjects;
   var movingTrump = require('./movingTrump.js');
 
   // Canvas Settings
@@ -49,7 +49,7 @@ window.onload = function () {
   function init() {
   	createjs.Ticker.setFPS(60);
   	movingTrump.init(stage, preload, WIDTH, HEIGHT);
-    //fallingObjects('holyBible', stage);
+    fallingObjects([preload.getResult('holyBible'), preload.getResult('dollarBills')], stage);
     stage.update();
   }
 };
