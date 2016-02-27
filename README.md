@@ -7,4 +7,3 @@ Mini Game for Berlin MiniJam
 - https://github.com/pixijs/pixi.js
 - https://github.com/showcases/javascript-game-engines
 - https://github.com/CreateJS
-- 
