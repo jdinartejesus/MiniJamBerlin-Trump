@@ -20,7 +20,7 @@ var paths = {
   scripts:  'src/assets/js/*.js',
   styles:   'src/assets/styles/*.sass',
   fonts:   'src/fonts/*.otf',
-  images:   'src/images/*/*.*',
+  images:   'src/assets/images/*.*',
 };
 
 // Environment

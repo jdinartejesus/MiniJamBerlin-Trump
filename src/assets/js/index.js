@@ -8,7 +8,7 @@ window.onload = function () {
   var fallingObjects = require('./fallingObjects.js');
 
   // Canvas Settings
-  var canvas = document.getElementById('halloween');
+  var canvas = document.getElementById('donaldtrump');
   canvas.width = WIDTH;
   canvas.height = HEIGHT;
   canvas.getContext('2d');
@@ -17,9 +17,13 @@ window.onload = function () {
 
   // Loading Images
   var preload = new createjs.LoadQueue();
-  preload.loadManifest([{
-    id: 'example', src: '../images/example.png',
+  preload.loadManifest([
+  {
+    id: 'holyBible', src: '../images/holyBible.png',
   },
+  {
+    id: 'dollarBills', src: '../images/dollarBills.png',
+  }
 
   // Add images here and ID
   ]);
@@ -27,5 +31,7 @@ window.onload = function () {
 
   function init() {
 
+    fallingObjects('holyBible', stage);
+    stage.update();
   }
 };
