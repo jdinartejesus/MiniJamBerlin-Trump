@@ -1,0 +1,23 @@
+{
+  "name": "minijameberlin-trump",
+  "version": "1.0.0",
+  "description": "Mini Game for Berlin MiniJam ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jdinartejesus/MiniJamBerlin-Trump.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jdinartejesus/MiniJamBerlin-Trump/issues"
+  },
+  "homepage": "https://github.com/jdinartejesus/MiniJamBerlin-Trump#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "pixi.js": "^3.0.9"
+  }
+}
