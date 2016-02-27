@@ -1,5 +1,5 @@
 /* global createjs, GAMEFPS, preload, stage */
-exports.fallingObejcts = function (items, container) {
+exports.fallingObjects = function (items, container) {
   if (!items || !container) { return; }
 
   var objectsContainer = new createjs.Container();
@@ -8,10 +8,9 @@ exports.fallingObejcts = function (items, container) {
   createjs.Ticker.setFPS(60);
   createjs.Ticker.addEventListener('tick', function (event) {
 
-    timeNewItem++;
-
-    if (timeNewItem == 20) {
-      addingItem(items, objectsContainer);
+    if (timeNewItem == 50) {
+      var item = randomItem(items);
+      addingItem(item, objectsContainer);
       timeNewItem = 0;
     }
 
@@ -22,9 +21,25 @@ exports.fallingObejcts = function (items, container) {
         objectsContainer.removeChildAt(j);
       }
     }
+
+    timeNewItem++;
+    stage.update();
   });
 
   stage.addChild(objectsContainer);
+};
+
+var randomItem = function (items) {
+
+  if (!items) {return;}
+
+  var randomItem = Math.floor(Math.random() * (100 - 0) + 0);
+
+  if (randomItem <= 30) {
+    return items[1];
+  }else {
+    return items[0];
+  }
 };
 
 var moveItem = function (item) {
@@ -54,5 +69,4 @@ var addingItem = function (item, container) {
   newItem.y = newItemY;
 
   container.addChild(newItem);
-  stage.update();
 };
