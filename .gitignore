@@ -1,2 +1,5 @@
 # node module packages
 /node_modules
+
+# build
+/build
