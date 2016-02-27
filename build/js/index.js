@@ -125,8 +125,8 @@ var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 	exports.fromByteArray = uint8ToBase64
 }(typeof exports === 'undefined' ? (this.base64js = {}) : exports))
 
-}).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../../node_modules/base64-js/lib/b64.js","/../../../node_modules/base64-js/lib")
-},{"FT5ORs":4,"buffer":2}],2:[function(require,module,exports){
+}).call(this,require("yw28T0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\..\\..\\node_modules\\base64-js\\lib\\b64.js","/..\\..\\..\\node_modules\\base64-js\\lib")
+},{"buffer":2,"yw28T0":3}],2:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 /*!
  * The buffer module from node.js, for the browser.
@@ -1238,8 +1238,75 @@ function assert (test, message) {
   if (!test) throw new Error(message || 'Failed assertion')
 }
 
-}).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../../node_modules/buffer/index.js","/../../../node_modules/buffer")
-},{"FT5ORs":4,"base64-js":1,"buffer":2,"ieee754":3}],3:[function(require,module,exports){
+}).call(this,require("yw28T0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\..\\..\\node_modules\\gulp-browserify\\node_modules\\buffer\\index.js","/..\\..\\..\\node_modules\\gulp-browserify\\node_modules\\buffer")
+},{"base64-js":1,"buffer":2,"ieee754":4,"yw28T0":3}],3:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+// shim for using process in browser
+
+var process = module.exports = {};
+
+process.nextTick = (function () {
+    var canSetImmediate = typeof window !== 'undefined'
+    && window.setImmediate;
+    var canPost = typeof window !== 'undefined'
+    && window.postMessage && window.addEventListener
+    ;
+
+    if (canSetImmediate) {
+        return function (f) { return window.setImmediate(f) };
+    }
+
+    if (canPost) {
+        var queue = [];
+        window.addEventListener('message', function (ev) {
+            var source = ev.source;
+            if ((source === window || source === null) && ev.data === 'process-tick') {
+                ev.stopPropagation();
+                if (queue.length > 0) {
+                    var fn = queue.shift();
+                    fn();
+                }
+            }
+        }, true);
+
+        return function nextTick(fn) {
+            queue.push(fn);
+            window.postMessage('process-tick', '*');
+        };
+    }
+
+    return function nextTick(fn) {
+        setTimeout(fn, 0);
+    };
+})();
+
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+}
+
+// TODO(shtylman)
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+
+}).call(this,require("yw28T0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\..\\..\\node_modules\\gulp-browserify\\node_modules\\process\\browser.js","/..\\..\\..\\node_modules\\gulp-browserify\\node_modules\\process")
+},{"buffer":2,"yw28T0":3}],4:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
@@ -1326,175 +1393,183 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-}).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../../node_modules/ieee754/index.js","/../../../node_modules/ieee754")
-},{"FT5ORs":4,"buffer":2}],4:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
-// shim for using process in browser
-
-var process = module.exports = {};
-
-process.nextTick = (function () {
-    var canSetImmediate = typeof window !== 'undefined'
-    && window.setImmediate;
-    var canPost = typeof window !== 'undefined'
-    && window.postMessage && window.addEventListener
-    ;
-
-    if (canSetImmediate) {
-        return function (f) { return window.setImmediate(f) };
-    }
-
-    if (canPost) {
-        var queue = [];
-        window.addEventListener('message', function (ev) {
-            var source = ev.source;
-            if ((source === window || source === null) && ev.data === 'process-tick') {
-                ev.stopPropagation();
-                if (queue.length > 0) {
-                    var fn = queue.shift();
-                    fn();
-                }
-            }
-        }, true);
-
-        return function nextTick(fn) {
-            queue.push(fn);
-            window.postMessage('process-tick', '*');
-        };
-    }
-
-    return function nextTick(fn) {
-        setTimeout(fn, 0);
-    };
-})();
-
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-}
-
-// TODO(shtylman)
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-
-}).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../../node_modules/process/browser.js","/../../../node_modules/process")
-},{"FT5ORs":4,"buffer":2}],5:[function(require,module,exports){
+}).call(this,require("yw28T0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/..\\..\\..\\node_modules\\ieee754\\index.js","/..\\..\\..\\node_modules\\ieee754")
+},{"buffer":2,"yw28T0":3}],5:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 window.onload = function () {
 
   // Global Values
-  var WIDTH = 768;
-  var HEIGHT = 1024;
+  var WIDTH = 1000;
+  var HEIGHT = 600;
 
   // Components
   var fallingObjects = require('./fallingObjects.js');
+  var movingTrump = require('./movingTrump.js');
 
   // Canvas Settings
   var canvas = document.getElementById('donaldtrump');
   canvas.width = WIDTH;
   canvas.height = HEIGHT;
-  canvas.getContext('2d');
+  var ctx = canvas.getContext('2d');
 
   var stage = new createjs.Stage(canvas);
 
   // Loading Images
   var preload = new createjs.LoadQueue();
-  preload.loadManifest([
-  {
-    id: 'holyBible', src: '../images/holyBible.png',
-  },
-  {
-    id: 'dollarBills', src: '../images/dollarBills.png',
-  }
-
-  // Add images here and ID
-  ]);
+	preload.loadManifest([{
+		id: 'example',
+		src: '../images/example.png'
+	}, {
+		id: 'bg',
+		src: '../images/bg/space.png',
+	}, {
+		id: 'heaven',
+		src: '../images/bg/heaven.png',
+	}, {
+		id: 'hell',
+		src: '../images/bg/hell.png',
+	}, {
+		id: 'trump',
+		src: '../images/trump/trump.png'
+	}, {
+		id: 'bullet',
+		src: '../images/objects/bullet.png'
+	}]);
   preload.on('complete', init, this);
 
   function init() {
-
-    fallingObjects('holyBible', stage);
-    stage.update();
+  	createjs.Ticker.setFPS(60);
+  	movingTrump.init(stage, preload, WIDTH, HEIGHT);
   }
 };
 
-}).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_dac02d7f.js","/")
-},{"./fallingObjects.js":6,"FT5ORs":4,"buffer":2}],6:[function(require,module,exports){
+}).call(this,require("yw28T0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_8779c6c.js","/")
+},{"./fallingObjects.js":6,"./movingTrump.js":7,"buffer":2,"yw28T0":3}],6:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
-/* global createjs, GAMEFPS, preload, stage */
-exports.fallingObejcts = function (items, container) {
-  if (!items || !container) { return; }
 
-  var objectsContainer = new createjs.Container();
-  var timeNewItem = 0;
+}).call(this,require("yw28T0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fallingObjects.js","/")
+},{"buffer":2,"yw28T0":3}],7:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+exports.init = function(stage, preload, width, height) {
 
-  createjs.Ticker.setFPS(60);
-  createjs.Ticker.addEventListener('tick', function (event) {
+	var TRUMP_WIDTH = 120;
+	var MAX_ACCEL = 10;
+	var ACCELERATION_PER_FRAME = 1;
+	var BULLET_SPEED = 10;
+	var FIRE_DELAY = 15;
 
-    timeNewItem++;
+	var accel = 0;
 
-    if (timeNewItem == 20) {
-      addingItem(items, objectsContainer);
-      timeNewItem = 0;
-    }
+	function addImage(id, x, y) {
+		var image = preload.getResult(id);
+		var bitmap = new createjs.Bitmap(image);
+		bitmap.x = x;
+		bitmap.y = y;
+		stage.addChild(bitmap);
+		return bitmap;
+	}
 
-    for (var j = 0; j < objectsContainer.children.length; j++) {
-      moveItem(objectsContainer.children[j]);
+	var bullets = [];
 
-      if (objectsContainer.children[j].y > HEIGHT) {
-        objectsContainer.removeChildAt(j);
-      }
-    }
-  });
+	var bg = addImage('bg',0,0);
+	var trump = addImage('trump', width/2, height-140);
 
-  stage.addChild(objectsContainer);
-};
+	var moveLeft = false;
+	var moveRight = false;
+	var firing = false;
 
-var moveItem = function (item) {
-  var randomSpeed = Math.floor(Math.random() * (5 - 1) + 1);
-  return item.y += randomSpeed;
-};
 
-var addingItem = function (item, container) {
+	stage.update();
 
-  var ICONBORDER = 16;
-  var newItem = new Image();
-  newItem = new createjs.Bitmap(preload.getResult(item));
-  var newItemY, newItemX;
+	var currentFireDelay = 0;
+	function fire() {
+		if (currentFireDelay > 0) return;
+		currentFireDelay = FIRE_DELAY;
+		var bullet = addImage('bullet', trump.x+75, trump.y-15);
+		bullets.push(bullet);
+	}
 
-  var lastItem = container.children[container.children.length - 1];
+	 createjs.Ticker.addEventListener("tick", handleTick);
+	 function handleTick(event) {
+	     // Actions carried out each tick (aka frame)
+	     if (moveLeft && accel > -MAX_ACCEL) {
+	     	if (accel > 0) {
+	     		accel -= 4*ACCELERATION_PER_FRAME ; 
+	     	} else {
+	        	accel -= ACCELERATION_PER_FRAME ; 
+	        }
+	     }
+	     if (moveRight && accel < MAX_ACCEL) {
+	     	if (accel < 0) {
+	     		accel += 4*ACCELERATION_PER_FRAME ; 
+	     	} else {
+	        	accel += ACCELERATION_PER_FRAME ; 
+	        }
+	     }
+	     if (!moveRight && !moveLeft) {
+	     	if (accel > 0) {
+	     		accel = accel - ACCELERATION_PER_FRAME ; 
+	     	} else {
+	     		accel = accel + ACCELERATION_PER_FRAME ;  
+	     	}
+	     	if (almostEqual(accel,0)) {
+	     		accel = 0;
+	     	}
+	     }
+	     trump.x += accel;
+	     if (trump.x > width - TRUMP_WIDTH) {
+			trump.x = width - TRUMP_WIDTH;     	
+	     }
+	     if (trump.x < 0) {
+			trump.x = 0;     	
+	     }
 
-  newItemX = Math.floor(Math.random() * ((WIDTH - ICONBORDER) - ICONBORDER) + ICONBORDER);
-  newItemY = 10;
+	     if (firing) {
+	     	fire();
+	     }
+	     if (currentFireDelay > 0) {
+	       currentFireDelay -= 1;
+	     }
 
-  if (container.children.length > 0) {
-    do {
-      newItemX = Math.floor(Math.random() * ((WIDTH - ICONBORDER) - ICONBORDER) + ICONBORDER);
-    }while (newItemX >= lastItem.x - ICONBORDER && newItemX <= lastItem.x + ICONBORDER);
-  }
+	     bullets.forEach(function(bullet) {
+	     	bullet.y -= BULLET_SPEED;
+	     });
 
-  newItem.x = newItemX;
-  newItem.y = newItemY;
+	     stage.update();
+	 }
 
-  container.addChild(newItem);
-  stage.update();
-};
+	window.onkeydown = function(event) {
+		keyHandler(event.keyCode, true);
+	};
 
-}).call(this,require("FT5ORs"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fallingObjects.js","/")
-},{"FT5ORs":4,"buffer":2}]},{},[5])
+	window.onkeyup = function(event) {
+		keyHandler(event.keyCode, false);
+	};
+
+	window.onmousedown = function(event) {
+		console.log(event.button);
+		firing = true;
+	};
+	window.onmouseup = function(event) {
+		firing = false;
+	};
+
+	function keyHandler(keyCode, down) {
+		switch (event.keyCode) {
+			case 37: // left
+				moveLeft = !!down;
+				break;
+			case 39:  // right
+				moveRight = !!down;
+				break;
+		};
+	}
+
+	function almostEqual(a,b) {
+		return Math.abs(a-b) < ACCELERATION_PER_FRAME + 0.1;
+	}
+
+
+}
+}).call(this,require("yw28T0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/movingTrump.js","/")
+},{"buffer":2,"yw28T0":3}]},{},[5])

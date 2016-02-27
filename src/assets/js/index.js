@@ -1,36 +1,54 @@
 window.onload = function () {
 
   // Global Values
-  var WIDTH = 768;
-  var HEIGHT = 1024;
+  var WIDTH = 1000;
+  var HEIGHT = 600;
 
   // Components
   var fallingObjects = require('./fallingObjects.js');
+  var movingTrump = require('./movingTrump.js');
 
   // Canvas Settings
   var canvas = document.getElementById('donaldtrump');
   canvas.width = WIDTH;
   canvas.height = HEIGHT;
-  canvas.getContext('2d');
+  var ctx = canvas.getContext('2d');
 
   var stage = new createjs.Stage(canvas);
 
   // Loading Images
   var preload = new createjs.LoadQueue();
-  preload.loadManifest([
-  {
-    id: 'holyBible', src: '../images/holyBible.png',
-  },
-  {
-    id: 'dollarBills', src: '../images/dollarBills.png',
-  }
-
-  // Add images here and ID
-  ]);
+	preload.loadManifest([{
+			id: 'holyBible',
+			src: '../images/holyBible.png',
+		}, {
+			id: 'dollarBills',
+			src: '../images/dollarBills.png',
+		}, {
+			id: 'example',
+			src: '../images/example.png'
+		}, {
+			id: 'bg',
+			src: '../images/bg/space.png',
+		}, {
+			id: 'heaven',
+			src: '../images/bg/heaven.png',
+		}, {
+			id: 'hell',
+			src: '../images/bg/hell.png',
+		}, {
+			id: 'trump',
+			src: '../images/trump/trump.png'
+		}, {
+			id: 'bullet',
+			src: '../images/objects/bullet.png'
+		}
+	]);
   preload.on('complete', init, this);
 
   function init() {
-
+  	createjs.Ticker.setFPS(60);
+  	movingTrump.init(stage, preload, WIDTH, HEIGHT);
     fallingObjects('holyBible', stage);
     stage.update();
   }
