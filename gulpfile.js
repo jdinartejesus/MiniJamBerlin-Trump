@@ -1,21 +1,22 @@
-var gulp = require('gulp');
-var browserify = require('gulp-browserify');
+var gulp = require('gulp'),
+bpjs = require('boilerplate-gulp-js'),
+path = require('path');
 
-gulp.task('scripts', function () {
-  gulp.src('src/assets/js/**.js')
-		.pipe(browserify({
-  		insertGlobals: true,
-		}))
-		.pipe(gulp.dest('./build/assets/js'));
+bpjs(gulp, {
+  // This will be used to name the built artifact (e.g., MyModule.js)
+  name: 'Trump',
+
+  // The root of your CommonJS modules
+  entry: path.join(__dirname, 'src/assets/js/index.js'),
+
+  // The sources for your project (used in linting and testing tasks)
+  sources: path.join(__dirname, 'src/assets/js/*.js'),
+
+  // The tests for your project
+  tests: path.join(__dirname, 'src/**/*Spec.js'),
+
+  // The destination to write the built files
+  dest: path.join(__dirname, 'build'),
 });
 
-gulp.task('html', function () {
-  gulp.src('./src/index.html')
-  .pipe(gulp.dest('./build'));
-});
-
-gulp.task('watch', function () {
-  gulp.watch('src/**/*.js', 'scripts');
-});
-
-gulp.task('default', ['html', 'scripts', 'watch']);
+// Rest of your gulp file, potentially overwriting the boilerplate-gulp tasks...
