@@ -15,9 +15,5 @@
   "bugs": {
     "url": "https://github.com/jdinartejesus/MiniJamBerlin-Trump/issues"
   },
-  "homepage": "https://github.com/jdinartejesus/MiniJamBerlin-Trump#readme",
-  "devDependencies": {
-    "gulp": "^3.9.1",
-    "pixi.js": "^3.0.9"
-  }
+  "homepage": "https://github.com/jdinartejesus/MiniJamBerlin-Trump#readme"
 }
