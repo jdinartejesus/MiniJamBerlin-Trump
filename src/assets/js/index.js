@@ -1,3 +1,5 @@
+/* global createjs */
+
 window.onload = function () {
 
   // Global Values
@@ -5,7 +7,7 @@ window.onload = function () {
   var HEIGHT = 600;
 
   // Components
-  var fallingObjects = require('./fallingObjects.js').fallingObjects;
+  var fallingObjects = require('./fallingObjects.js');
   var movingTrump = require('./movingTrump.js');
 
   // Canvas Settings
@@ -18,38 +20,41 @@ window.onload = function () {
 
   // Loading Images
   var preload = new createjs.LoadQueue();
-	preload.loadManifest([{
-			id: 'holyBible',
-			src: '../images/holyBible.png',
-		}, {
-			id: 'dollarBills',
-			src: '../images/dollarBills.png',
-		}, {
-			id: 'example',
-			src: '../images/example.png'
-		}, {
-			id: 'bg',
-			src: '../images/space.png',
-		}, {
-			id: 'heaven',
-			src: '../images/heaven.png',
-		}, {
-			id: 'hell',
-			src: '../images/hell.png',
-		}, {
-			id: 'trump',
-			src: '../images/trump.png'
-		}, {
-			id: 'bullet',
-			src: '../images/bullet.png'
-		}
-	]);
+  preload.loadManifest([{
+    id: 'holyBible',
+    src: '../images/holyBible.png',
+  }, {
+    id: 'dollarBills',
+    src: '../images/dollarBills.png',
+  }, {
+    id: 'bg',
+    src: '../images/space.png',
+  }, {
+    id: 'heaven',
+    src: '../images/heaven.png',
+  }, {
+    id: 'hell',
+    src: '../images/hell.png',
+  }, {
+    id: 'trump',
+    src: '../images/trump.png',
+  }, {
+    id: 'dollarTrump',
+    src: '../images/dollarTrump.png',
+  }, {
+    id: 'hitTrump',
+    src: '../images/hitTrump.png',
+  }, {
+    id: 'bullet',
+    src: '../images/bullet.png',
+  }
+  ]);
   preload.on('complete', init, this);
 
   function init() {
-  	createjs.Ticker.setFPS(60);
-  	movingTrump.init(stage, preload, WIDTH, HEIGHT);
-    fallingObjects([preload.getResult('holyBible'), preload.getResult('dollarBills')], stage);
+    createjs.Ticker.setFPS(60);
+    movingTrump.init(stage, preload, WIDTH, HEIGHT);
+    fallingObjects.init(preload, stage, WIDTH, HEIGHT);
     stage.update();
   }
 };
