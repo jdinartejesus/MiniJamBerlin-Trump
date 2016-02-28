@@ -52,6 +52,7 @@ window.onload = function () {
   preload.on('complete', init, this);
 
   function init() {
+
     createjs.Ticker.setFPS(60);
     movingTrump.init(stage, preload, WIDTH, HEIGHT);
     fallingObjects.init(preload, stage, WIDTH, HEIGHT);
