@@ -1,5 +1,5 @@
 # MiniJamBerlin-Trump
-Mini Game for Berlin MiniJam 27 February. 
+Mini Game for Berlin MiniJam 27 February.
 
 
 ## Framework List
@@ -15,7 +15,7 @@ Mini Game for Berlin MiniJam 27 February.
 
 ## TODO
 
-- [ ] Show points/money collected
+- [x] Show points/money collected
 - [ ] Expression on being hit by money/bible
 - [ ] More levels (Maybe)
 
