@@ -1,5 +1,5 @@
 # MiniJamBerlin-Trump
-Mini Game for Berlin MiniJam
+Mini Game for Berlin MiniJam 27 February. 
 
 
 ## Framework List
@@ -11,5 +11,12 @@ Mini Game for Berlin MiniJam
 ## Docs Framework
 
   http://createjs.com/getting-started/easeljs
+
+
+## TODO
+
+- [ ] Show points/money collected
+- [ ] Expression on being hit by money/bible
+- [ ] More levels (Maybe)
 
 ### Let's do this!!! Go Team!
